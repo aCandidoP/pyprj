@@ -67,7 +67,7 @@ def lContas():
 
 def menu():
     ret = 0
-    while ret != 6:
+    while ret != 5:
         print('BEM VINDO AO SISBANK, ESCOLHA UMA OPÇÃO')
         print('1 - NOVA CONTA')
         print('2 - INFORMAÇÕES DAS CONTAS')
