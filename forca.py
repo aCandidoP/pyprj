@@ -8,7 +8,7 @@ palavra_secreta = ''
 
 ganhou = False
 
-#Escolhendo o Tema
+
 while True:
     try:
         escolha = int(input('Bem vindo ao jogo da forca, escolha entre tema Comida (1) ou Cidades (2) ou digite qualquer outro número para sair: '))
