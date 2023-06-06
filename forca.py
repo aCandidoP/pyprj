@@ -1,57 +1,99 @@
 from random import choice
 
-temas = ['Carro', 'Comida', 'Cidade']
-tema = choice(temas)
-palavras_carro = ['gol', 'palio', 'uno', 'hilux']
-palavras_comida = ['pizza', 'carne', 'biscoito', 'bolo']
-palavras_cidade = ['florianopolis', 'Carangola']
-palavras_forca = []
+comida = ['pizza', 'carne', 'sorvete', 'biscoito']
+cidade = ['betim', 'juiz de Fora', 'belem', 'rio de janeiro']
+palavra = ''
+letras_usuario = []
+palavra_secreta = ''
 
-if tema == 'Carro':
-    palavras_forca = palavras_carro
-elif tema == 'Comida':
-    palavras_forca = palavras_comida
-elif tema == 'Cidade':
-        palavras_forca = palavras_cidade
+ganhou = False
 
-print(f'O tema é: {tema}')
-
-palavra_forca = choice(palavras_forca)
-
-print(f'A palavra possui {len(palavra_forca)} letras')
-print('Você possui 3 tentativas para acertar a palavra')
-
-digitadas = []
-conta_chance = 3
+#Escolhendo o Tema
 while True:
-    letra = str(input("Digite uma letra: "))
-    if len(letra) > 1:
-        print('Erro, não vale mais de uma letra por tentativa')
-        continue
-    
-    digitadas.append(letra)
+    try:
+        escolha = int(input('Bem vindo ao jogo da forca, escolha entre tema Comida (1) ou Cidades (2) ou digite qualquer outro número para sair: '))
+        
+        if escolha == 1:
+            palavra = choice(comida)
+            break
 
-    palavra_secreta = ''
-    for letra_secreta in palavra_forca:
-        if letra_secreta in digitadas:
-            palavra_secreta += letra_secreta
+        elif escolha == 2:
+            palavra = choice(cidade)
+            break
+
         else:
-            palavra_secreta += '*'
-
-    if palavra_secreta == palavra_forca:
-        print('Parabéns, você venceu')
-        print(f'A palavra é {palavra_forca}')
+            print('SAINDO DO PROGRAMA -------')
+            break
+     
+    except ValueError:
+        print('O valor digitado não é um número inteiro válido')
         break
-    else:
-        print(f'A palavra secreta está assim: {palavra_secreta}')
 
-    if letra not in palavra_secreta:
-        conta_chance -= 1
+if escolha == 1:
+    tema = 'Comida'
+if escolha == 2:
+    tema = 'Cidade'
+
+print(f'o tema é {tema} e a palavra tem {len(palavra)} letras')
+
+
+
+
+chances = 5
+
+while (chances != 0) and (palavra_secreta != palavra):
+    print(f'Ainda lhe restam {chances} tentativas')
+    for letra in palavra:
+        
+        try:
+            letra_escolhida = str(input('Escolha uma letra: '))
+            if len(letra_escolhida) > 1:
+                print('Você digitou mais de 1 letra')
+                continue
+            if letra_escolhida.isdigit():
+                print('Você digitou um número, espero uma letra')
+                continue
+                
+            else:
+                letras_usuario.append(letra_escolhida)
+
+        except:
+            print('O dígito não é uma letra')
+            continue
+
+        for letra_secreta in palavra:
+            if letra_secreta in letras_usuario:
+                palavra_secreta += letra_secreta
+            else:
+                palavra_secreta += '*'
+
+        if palavra_secreta == palavra:
+                print('Parabéns, você venceu')
+                print(f'A palavra é {palavra}')
+                break
+        else:
+            print(f'A palavra secreta está assim: {palavra_secreta}')
+
+        print(f'Ainda lhe restam {chances} tentativas')
+
+        if letra_escolhida not in palavra:
+                chances -= 1
     
-    if conta_chance <= 0:
-        print('Você perdeu')
-        break
+        if chances <= 0:
+                print('Você perdeu')
+                break
+        
+        palavra_secreta = ''
+            
+           
+        
 
-    print(f'Você ainda tem {conta_chance} chances')
-    print()
+
+
+
+
+
+    
+
+
 
